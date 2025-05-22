@@ -7,6 +7,7 @@ class ConsolaLoginTest {
 
     @BeforeEach
     void setUp() {
+        ConsolaLogin consolaLogin = new ConsolaLogin();
     }
 
     @Test

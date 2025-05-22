@@ -25,7 +25,6 @@ public class DatosLogin {
             while ((linea = lector.readLine()) != null) {
                 if (linea.contains(";")) {
                     credenciales.add(linea.trim());
-                    System.out.println(linea);
                 }
             }
         } catch (IOException e) {
