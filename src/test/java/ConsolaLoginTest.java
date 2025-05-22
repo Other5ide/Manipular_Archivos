@@ -11,7 +11,16 @@ class ConsolaLoginTest {
     }
 
     @Test
-    void testConsolaLogin() {
-        ConsolaLogin.menu();
+    void testLoginValido() {
+        DatosLogin datosLogin = new DatosLogin();
+        Login login = new Login();
+        assertTrue(login.autenticar("a","a",datosLogin));
+    }
+
+    @Test
+    void testUsuarioInvalido() {
+        DatosLogin datosLogin = new DatosLogin();
+        Login login = new Login();
+        assertFalse(login.autenticar("aaa","a",datosLogin));
     }
 }

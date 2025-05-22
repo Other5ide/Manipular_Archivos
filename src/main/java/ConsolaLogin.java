@@ -65,8 +65,5 @@ public class ConsolaLogin {
             System.out.println("Inicio de sesion fallido");
         }
 
-
-        // TODO: Pedir usuario y contraseña por consola
-        // TODO: Llamar a login.autenticar() y mostrar mensaje según resultado
     }
 }
