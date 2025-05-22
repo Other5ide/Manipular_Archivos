@@ -24,13 +24,14 @@ public class DatosLogin {
             String linea;
             while ((linea = lector.readLine()) != null) {
                 if (linea.contains(";")) {
-                    credenciales.add(linea);
+                    credenciales.add(linea.trim());
+                    System.out.println(linea);
                 }
             }
         } catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
-
         // TODO: Ignorar líneas vacías o mal formateadas
     }
+
 }
