@@ -1,3 +1,8 @@
+package Vista;
+
+import Controlador.Login;
+import Modelo.DatosLogin;
+
 import java.util.Scanner;
 
 /**
@@ -27,7 +32,7 @@ public class ConsolaLogin {
      * Muestra las opciones disponibles para el usuario.
      */
     private static void mostrarOpciones() {
-        System.out.println("Consola Login");
+        System.out.println("Consola:");
         System.out.println("Selecciona una opcion: ");
         System.out.println("1. Log In");
         System.out.println("2. Salir");

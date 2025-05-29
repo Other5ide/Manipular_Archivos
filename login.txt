@@ -1,3 +1,0 @@
-usuario1;clave123
-usuario2;abc456
-a;a
