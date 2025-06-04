@@ -1,7 +1,10 @@
 package Vista;
 
 import Controlador.Login;
+import Controlador.SesionActiva;
+import Helper.Helpers;
 import Modelo.DatosLogin;
+import Modelo.GestorUsuarios;
 
 import java.util.Scanner;
 
@@ -66,6 +69,8 @@ public class ConsolaLogin {
         Login login = new Login();
         if (login.autenticar(usuario, contrasena, new DatosLogin())) {
             System.out.println("Se ha autenticado el usuario, bienvenido al sistema");
+            //Iniciar una SesionActiva de tipo admin o user
+            //SesionActiva sesionActiva = new SesionActiva(usuario, );
         } else {
             System.out.println("Inicio de sesion fallido");
         }

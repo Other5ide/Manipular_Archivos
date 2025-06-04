@@ -1,4 +1,54 @@
 package Modelo;
 
+import java.io.*;
+import static Controlador.Login.obtenerCampoDesdeDatos;
+
+/**
+ * Registra nuevos usuarios en login.txt.
+ */
 public class GestorUsuarios {
+    private String archivo = "loginUsers.txt";
+
+    public GestorUsuarios(String usuario, String clave) {
+        registrar(usuario, clave);
+        // TODO: Crear archivo si no existe.
+    }
+
+    public boolean registrar(String usuario, String clave) {
+        if (validarRegistro(usuario, clave)) {
+            try (BufferedWriter escritor = new BufferedWriter(new FileWriter("DB/loginUsers.txt"))) {
+                escritor.write(usuario+";"+clave+";"+"user");
+                escritor.newLine();
+                escritor.flush(); // Fuerza el guardado inmediato
+            } catch (IOException e) {
+                System.out.println("Error al registrar usuario: " + e.getMessage());
+            }
+            return true;
+        }
+        // TODO: Agregar usuario al archivo login.txt.
+        return false;
+    }
+
+    public boolean validarRegistro(String usuario, String clave) {
+        if (usuario == null || usuario == "" || clave == null || clave == "") {
+            System.out.println("Usuario o Clave no pueden estar vacios");
+            return false;
+        } if (estaTomadoElNombre(usuario, new DatosLogin()))
+            return false;
+        return true;
+    }
+
+    public boolean estaTomadoElNombre(String usuario, DatosLogin datos) {
+        String nombreUsuario = usuario + ";";
+
+        for (int i = 0; i < datos.credenciales.size(); i++) {
+                if (nombreUsuario.equals(datos.credenciales.get(i))) {
+                    return true;
+                } else if (usuario.contentEquals(obtenerCampoDesdeDatos(datos.credenciales.get(i)))) {
+                    System.out.println("El usuario  " + usuario + " ya existe");
+                }
+        }
+        return false;
+    }
+
 }

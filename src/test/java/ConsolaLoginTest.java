@@ -26,4 +26,9 @@ class ConsolaLoginTest {
         Login login = new Login();
         assertFalse(login.autenticar("aaa","a",datosLogin));
     }
+
+    @Test
+    void testLogin(){
+        Login login = new Login();
+    }
 }
