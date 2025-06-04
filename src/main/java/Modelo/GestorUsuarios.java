@@ -1,5 +1,7 @@
 package Modelo;
 
+import Helper.Helpers;
+
 import java.io.*;
 import static Controlador.Login.obtenerCampoDesdeDatos;
 
@@ -10,6 +12,7 @@ public class GestorUsuarios {
     private String archivo = "loginUsers.txt";
 
     public GestorUsuarios(String usuario, String clave) {
+        Helpers.creaArchivoSiNoExiste("DB/LoginUsers.txt");
         registrar(usuario, clave);
         // TODO: Crear archivo si no existe.
     }
@@ -17,7 +20,7 @@ public class GestorUsuarios {
     public boolean registrar(String usuario, String clave) {
         if (validarRegistro(usuario, clave)) {
             try (BufferedWriter escritor = new BufferedWriter(new FileWriter("DB/loginUsers.txt"))) {
-                escritor.write(usuario+";"+clave+";"+"user");
+                escritor.write(usuario+";"+clave);
                 escritor.newLine();
                 escritor.flush(); // Fuerza el guardado inmediato
             } catch (IOException e) {

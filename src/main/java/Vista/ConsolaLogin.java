@@ -68,7 +68,8 @@ public class ConsolaLogin {
 
         Login login = new Login();
         if (login.autenticar(usuario, contrasena, new DatosLogin())) {
-            System.out.println("Se ha autenticado el usuario, bienvenido al sistema");
+            System.out.println("Se ha autenticado el usuario, bienvenido al sistema " + usuario);
+            SesionActiva sesionActiva = new SesionActiva(usuario, login.esAdmin(usuario));
             //Iniciar una SesionActiva de tipo admin o user
             //SesionActiva sesionActiva = new SesionActiva(usuario, );
         } else {

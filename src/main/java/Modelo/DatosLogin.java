@@ -13,20 +13,21 @@ import java.io.File;
  */
 public class DatosLogin {
     public ArrayList<String> credenciales = new ArrayList<>();
+    public ArrayList<String> credencialesAdmins = new ArrayList<>();
 
     /**
      * Constructor que inicializa las credenciales desde el archivo.
      */
     public DatosLogin() {
-        cargarUsuarios();
+        cargarAdmins("DB/admins.txt");
+        cargarUsuarios("DB/loginUsers.txt");
     }
-
     /**
      * Lee el archivo login.txt y agrega las líneas válidas a la lista de credenciales.
      */
-    private void cargarUsuarios() {
-       Helpers.creaArchivoSiNoExiste("DB/loginUsers.txt"); // Revisa si existe el archivo loginUsers cada vez que se carga el metodo
-        try (BufferedReader lector = new BufferedReader(new FileReader("DB/loginUsers.txt"))) { //Esta logica es demasiado compleja como para implementar un boque try-catch
+    private void cargarUsuarios(String filePath) {
+       Helpers.creaArchivoSiNoExiste(filePath); // Revisa si existe el archivo cada vez que se carga el metodo
+        try (BufferedReader lector = new BufferedReader(new FileReader(filePath))) { //Esta logica es demasiado compleja como para implementar un boque try-catch
             String linea;
             while ((linea = lector.readLine()) != null) {
                 if (linea.contains(";")) {
@@ -36,7 +37,18 @@ public class DatosLogin {
         } catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
 
-        }
-        // TODO: Ignorar líneas vacías o mal formateadas
+        }// TODO: Ignorar líneas vacías o mal formateadas
+    }
+    private void cargarAdmins(String filePath) {
+        Helpers.creaArchivoSiNoExiste(filePath); // Revisa si existe el archivo cada vez que se carga el metodo
+        try (BufferedReader lector = new BufferedReader(new FileReader(filePath))) { //Esta logica es demasiado compleja como para implementar un boque try-catch
+            String linea;
+            while ((linea = lector.readLine()) != null) {
+                    credencialesAdmins.add(linea);
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+
+        }// TODO: Ignorar líneas vacías o mal formateadas
     }
 }

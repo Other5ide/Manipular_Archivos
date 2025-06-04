@@ -1,5 +1,6 @@
 package Controlador;
 
+import Helper.Helpers;
 import Modelo.DatosLogin;
 
 /**
@@ -18,21 +19,15 @@ public class Login {
      * @return true si las credenciales son válidas, false en caso contrario
      */
     public boolean autenticar(String usuario, String clave, DatosLogin datos) {
-        String intento = usuario + ";" + clave +";admin";
+        String intento = usuario + ";" + clave;
 
-
-        for (int i = 0; i < datos.credenciales.size(); i++) { //Recorrer el arreglo credenciales de DatosLogin deberia ser un metodo aparte
-            try { //Este bloque try-catch es demasiado complejo y generara problemas al hacer debugging
-                if (intento.equals(datos.credenciales.get(i))) {
-                    return true;
-                } else if (usuario.contentEquals(obtenerCampoDesdeDatos(datos.credenciales.get(i)))) {
-                    System.out.println("Contraseña incorrecta para el usuario " + usuario);
-                }
-            } catch (NullPointerException npe) {
-                System.out.println("Usuario no encontrado");
-            }
+        if (Helpers.contieneCoincidencia(datos.credenciales, intento)) {
+            return true;
+        } else {
+            System.out.println("contraseña o nombre de usuario incorrectos");
+            return false;
         }
-        return false;
+
     }
 
     public static String obtenerCampoDesdeDatos(String lineaCredencial, int parteDeLinea) { //El texto antes del ';' de una linea es considerado una parte. El valor minimo de parteDeLinea es 0 y corresponde al nombre de usuario
@@ -47,10 +42,10 @@ public class Login {
         return obtenerCampoDesdeDatos(lineaCredencial, 0);
     }
 
-    public boolean esAdmin(String usuario, String clave, DatosLogin datos) {
-        for (int i = 0; i < datos.credenciales.size(); i++) {
-            if (datos.credenciales.get(i).equals("admin")) {}
+    public boolean esAdmin(String usuario) {
+        if (Helpers.contieneCoincidencia(datos.credencialesAdmins, usuario)){
+            return true;
         }
-    return false;
+        return false;
     }
 }
