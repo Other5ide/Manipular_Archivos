@@ -37,7 +37,7 @@ public class DatosLogin {
         } catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
 
-        }// TODO: Ignorar líneas vacías o mal formateadas
+        }
     }
     private void cargarAdmins(String filePath) {
         Helpers.creaArchivoSiNoExiste(filePath); // Revisa si existe el archivo cada vez que se carga el metodo
@@ -49,6 +49,6 @@ public class DatosLogin {
         } catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
 
-        }// TODO: Ignorar líneas vacías o mal formateadas
+        }
     }
 }

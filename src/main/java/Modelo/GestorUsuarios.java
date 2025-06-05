@@ -22,13 +22,11 @@ public class GestorUsuarios {
             try (BufferedWriter escritor = new BufferedWriter(new FileWriter("DB/loginUsers.txt"))) {
                 escritor.write(usuario+";"+clave);
                 escritor.newLine();
-                escritor.flush(); // Fuerza el guardado inmediato
             } catch (IOException e) {
                 System.out.println("Error al registrar usuario: " + e.getMessage());
             }
             return true;
         }
-        // TODO: Agregar usuario al archivo login.txt.
         return false;
     }
 
@@ -48,7 +46,7 @@ public class GestorUsuarios {
                 if (nombreUsuario.equals(datos.credenciales.get(i))) {
                     return true;
                 } else if (usuario.contentEquals(obtenerCampoDesdeDatos(datos.credenciales.get(i)))) {
-                    System.out.println("El usuario  " + usuario + " ya existe");
+                    System.out.println("El usuario '" + usuario + "' ya existe");
                 }
         }
         return false;

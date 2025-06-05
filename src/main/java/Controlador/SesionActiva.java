@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Representa la sesión de un usuario logueado.
  */
 public class SesionActiva {
-    private boolean adminPrivileges = false;
+    private static boolean adminPrivileges = false;
     private final String usuario;
     private final DatosSesion datosSesion;
     static Scanner scanner = new Scanner(System.in);
@@ -19,8 +19,9 @@ public class SesionActiva {
         this.usuario = usuario;
         this.datosSesion = new DatosSesion(usuario);
         if (admin) {
-            this.adminPrivileges = true;
+            adminPrivileges = true;
         }
+        menuSesion();
     }
 
     /**
@@ -30,9 +31,6 @@ public class SesionActiva {
         String opcion;
         do {
             mostrarOpciones();
-            if (adminPrivileges) {
-                mostrarOpciones();
-            }
             opcion = scanner.nextLine();
             ejecutarOpcion(opcion);
 
@@ -43,12 +41,18 @@ public class SesionActiva {
         // TODO: Salir de sesión.
     }
 
-    private static void ejecutarOpcion(String opcion) {
+    private void ejecutarOpcion(String opcion) {
         switch (opcion) {
             case "1" -> escribirTarea();
             case "2" -> {
-                System.out.println("Cerrar Sesion...");
-                scanner.close();
+                System.out.println("Cerrando Sesion...");
+            }
+            case "3" -> {
+                if (!adminPrivileges) {
+                    System.out.println("No tiene permiso para ejecutar esta opcion");
+                } else {
+                    registrarUsuario();
+                }
             }
             default -> System.out.println("Opcion invalida");
         }
@@ -56,13 +60,13 @@ public class SesionActiva {
 
     private void mostrarOpciones() {
         if (adminPrivileges) {
-            System.out.println("Sesion activa como Administrador:");
+            System.out.println("Sesion activa como Administrador.");
             System.out.println("Selecciona una opcion: ");
             System.out.println("1. Añadir tarea a tu lista TODO");
             System.out.println("2. Cerrar Sesion");
             System.out.println("3. Registrar usuario");
         } else {
-            System.out.println("Sesion activa como usuario:");
+            System.out.println("Sesion activa como usuario.");
             System.out.println("Selecciona una opcion: ");
             System.out.println("1. Añadir tarea a tu lista TODO");
             System.out.println("2. Cerrar Sesion");
@@ -71,7 +75,9 @@ public class SesionActiva {
     }
 
 
-    private static void escribirTarea() {
+    private void escribirTarea() {
+        String tarea = scanner.nextLine();
+        DatosSesion datossesion = new DatosSesion(usuario);
         // TODO: Pedir tarea al usuario y delegar a datosSesion.
     }
 
