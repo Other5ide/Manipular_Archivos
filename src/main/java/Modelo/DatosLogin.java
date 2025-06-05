@@ -31,7 +31,7 @@ public class DatosLogin {
             String linea;
             while ((linea = lector.readLine()) != null) {
                 if (linea.contains(";")) {
-                    credenciales.add(linea); //TODO: limpiar los caracteres invalidos como ';' y espacios
+                    credenciales.add(linea); //TODO: limpiar los caracteres invalidos y espacios
                 }
             }
         } catch (IOException e) {

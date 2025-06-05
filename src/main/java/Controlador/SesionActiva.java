@@ -47,9 +47,7 @@ public class SesionActiva {
                     registrarUsuario();
                 }
             }
-            case "4" -> {
-                System.out.println("Tus tareas actuales:");
-                datosSesion.mostrarTareas();
+            case "4" -> {datosSesion.mostrarTareas();
             }
             default -> System.out.println("Opcion invalida");
         }
