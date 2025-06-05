@@ -5,7 +5,6 @@ import Modelo.DatosSesion;
 import Modelo.GestorUsuarios;
 
 import java.util.Scanner;
-//TODO: al crearse este objeto falla algo -> GestorUsuarios
 /**
  * Representa la sesión de un usuario logueado.
  */
@@ -48,6 +47,10 @@ public class SesionActiva {
                     registrarUsuario();
                 }
             }
+            case "4" -> {
+                System.out.println("Tus tareas actuales:");
+                datosSesion.mostrarTareas();
+            }
             default -> System.out.println("Opcion invalida");
         }
     }
@@ -59,20 +62,27 @@ public class SesionActiva {
             System.out.println("1. Añadir tarea a tu lista TODO");
             System.out.println("2. Cerrar Sesion");
             System.out.println("3. Registrar usuario");
+            System.out.println("4. Mostrar tareas");
         } else {
             System.out.println("Sesion activa como usuario.");
             System.out.println("Selecciona una opcion: ");
             System.out.println("1. Añadir tarea a tu lista TODO");
             System.out.println("2. Cerrar Sesion");
+            System.out.println("4. Mostrar tareas");
         }
 
     }
 
 
     private void escribirTarea() {
+        System.out.println("Escribe la tarea para agregar: ");
         String tarea = scanner.nextLine();
-        DatosSesion datossesion = new DatosSesion(usuario);
-        // TODO: Pedir tarea al usuario y delegar a datosSesion.
+
+        if (this.datosSesion.escribirTarea(tarea)) {
+            System.out.println("Se ha escrito la tarea '" + tarea+"' existosamente");
+        } else {
+            System.out.println("No se ha podido escribir la tarea '" + tarea+"'");
+        }
     }
 
     private void registrarUsuario() {
