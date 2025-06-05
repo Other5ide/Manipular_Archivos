@@ -32,6 +32,7 @@ public class DatosSesion {
      * @return true si se guardó correctamente, false si ocurrió un error.
      */
     public boolean escribirTarea(String tarea) {
+
         // TODO: Implementar escritura en el archivo.
         return false;
     }

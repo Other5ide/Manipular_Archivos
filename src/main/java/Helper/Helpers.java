@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Helpers {
 
     public static String quitarEspacios(String str) {
-        return str.replaceAll("\\s+", "");
+        return str.replaceAll("\\s+ ;", "");
     }
 
     public static boolean creaArchivoSiNoExiste(String filePath) {

@@ -14,14 +14,14 @@ public class GestorUsuarios {
     public GestorUsuarios(String usuario, String clave) {
         Helpers.creaArchivoSiNoExiste("DB/LoginUsers.txt");
         registrar(usuario, clave);
-        // TODO: Crear archivo si no existe.
     }
 
     public boolean registrar(String usuario, String clave) {
         if (validarRegistro(usuario, clave)) {
-            try (BufferedWriter escritor = new BufferedWriter(new FileWriter("DB/loginUsers.txt"))) {
+            try (BufferedWriter escritor = new BufferedWriter(new FileWriter("DB/loginUsers.txt", true))) {
                 escritor.write(usuario+";"+clave);
                 escritor.newLine();
+                escritor.flush();
             } catch (IOException e) {
                 System.out.println("Error al registrar usuario: " + e.getMessage());
             }

@@ -18,9 +18,7 @@ public class SesionActiva {
     public SesionActiva(String usuario, Boolean admin) {
         this.usuario = usuario;
         this.datosSesion = new DatosSesion(usuario);
-        if (admin) {
-            adminPrivileges = true;
-        }
+        adminPrivileges = admin;
         menuSesion();
     }
 
@@ -35,10 +33,6 @@ public class SesionActiva {
             ejecutarOpcion(opcion);
 
         } while (!opcion.equals("2"));
-        // TODO: Mostrar opciones según si el usuario es admin o no.
-        // TODO: Escribir tareas.
-        // TODO: Registrar usuarios (solo admin).
-        // TODO: Salir de sesión.
     }
 
     private void ejecutarOpcion(String opcion) {
