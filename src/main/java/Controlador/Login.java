@@ -2,6 +2,7 @@ package Controlador;
 
 import Helper.Helpers;
 import Modelo.DatosLogin;
+import Modelo.Usuario;
 
 /**
  * Clase encargada de verificar las credenciales del usuario.
@@ -18,14 +19,14 @@ public class Login {
      * @param datos objeto Modelo.DatosLogin que contiene la lista de credenciales
      * @return true si las credenciales son válidas, false en caso contrario
      */
-    public boolean autenticar(String usuario, String clave, DatosLogin datos) {
+    public Usuario autenticar(String usuario, String clave, DatosLogin datos) {
         String intento = usuario + ";" + clave;
 
         if (Helpers.contieneCoincidencia(datos.credenciales, intento)) {
-            return true;
+            return new Usuario(usuario, clave);
         } else {
             System.out.println("contraseña o nombre de usuario incorrectos");
-            return false;
+            return null;
         }
 
     }

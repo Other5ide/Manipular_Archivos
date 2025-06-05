@@ -67,7 +67,7 @@ public class ConsolaLogin {
         String contrasena = scanner.nextLine();
 
         Login login = new Login();
-        if (login.autenticar(usuario, contrasena, new DatosLogin())) {
+        if (login.autenticar(usuario, contrasena, new DatosLogin()) != null) {
             System.out.println("Se ha autenticado el usuario, bienvenido al sistema " + usuario);
             SesionActiva sesionActiva = new SesionActiva(usuario, login.esAdmin(usuario));
         } else {
