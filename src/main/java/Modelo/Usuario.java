@@ -3,10 +3,14 @@ package Modelo;
 public class Usuario {
     private String nombre;
     private String clave;
+    private Perfil perfil;
+    private String correo;
 
-    public Usuario(String nombre, String clave) {
+    public Usuario(String nombre, String clave, String correo) {
         this.nombre = nombre;
         this.clave = clave;
+        this.perfil = new Perfil(correo);
+
     }
 
     public String getNombre() {

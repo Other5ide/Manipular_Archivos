@@ -75,8 +75,14 @@ public class SesionActiva {
     private void escribirTarea() {
         System.out.println("Escribe la tarea para agregar: ");
         String tarea = scanner.nextLine();
+        System.out.println("Define la prioridad de la tarea: (0,1 o 2)");
+        int prioridad = scanner.nextInt(); //TODO: Implementar un try para evitar un crash debido al ingreso de una letra
+        while (prioridad < 0 || prioridad > 2) {
+            System.out.println("Prioridad invalida: debe ser un numero entero entre 0 y 2");
+            prioridad = scanner.nextInt();
+        }
 
-        if (this.datosSesion.escribirTarea(tarea)) {
+        if (this.datosSesion.escribirTarea(tarea, prioridad)) {
             System.out.println("Se ha escrito la tarea '" + tarea+"' existosamente");
         } else {
             System.out.println("No se ha podido escribir la tarea '" + tarea+"'");

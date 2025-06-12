@@ -3,7 +3,7 @@ package Modelo;
 import Helper.Helpers;
 
 import java.io.*;
-import static Controlador.Login.obtenerCampoDesdeDatos;
+import static Controlador.Login.obtenerParteDesdeLinea;
 
 /**
  * Registra nuevos usuarios en login.txt.

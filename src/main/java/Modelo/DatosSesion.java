@@ -31,12 +31,14 @@ public class DatosSesion {
      * @param tarea Texto de la tarea.
      * @return true si se guardó correctamente, false si ocurrió un error.
      */
-    public boolean escribirTarea(String tarea) {
+    public boolean escribirTarea(String tarea, int prioridad ) {
         try (BufferedWriter escritor = new BufferedWriter(new FileWriter(nombreArchivo, true))) {
             escritor.write(tarea);
             escritor.newLine();
             escritor.flush();
-            tareas.add(new Tarea(tarea));
+            Tarea nuevaTarea = new Tarea(tarea);
+            establecerPrioridad(nuevaTarea, prioridad);
+            tareas.add(nuevaTarea);
         } catch (IOException e) {
             System.out.println("Error al escribir tarea: " + e.getMessage());
             return false;
@@ -57,10 +59,18 @@ public class DatosSesion {
                 System.out.println("Error al leer el archivo: " + e.getMessage());
             }
     }
+    public void establecerPrioridad(Tarea tarea, int prioridad) {
+        switch (prioridad) {
+            case 1 -> tarea.setPrioridad(Prioridad.MEDIA);
+            case 2 -> tarea.setPrioridad(Prioridad.ALTA);
+            default -> tarea.setPrioridad(Prioridad.BAJA);
+        }
+
+    }
     public void mostrarTareas() {
         System.out.println("Tus tareas anotadas:");
         for (Tarea tarea : tareas) {
-            System.out.println(tarea.getDescripcion());
+            System.out.println(tarea.getDescripcion() + "; Prioridad:" + tarea.getPrioridad());
         }
     }
 }
