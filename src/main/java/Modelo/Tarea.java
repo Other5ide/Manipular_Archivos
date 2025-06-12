@@ -2,6 +2,7 @@ package Modelo;
 
 public class Tarea {
     private String descripcion;
+    private enum prioridad {LOW, MEDIUM, HIGH};
 
     public String getDescripcion() {
         return descripcion;

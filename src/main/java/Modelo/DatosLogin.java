@@ -1,19 +1,19 @@
 package Modelo;
 
+import Controlador.Login;
 import Helper.Helpers;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.io.File;
 
 /**
  * Clase responsable de cargar las lineas validas desde un archivo y añadirlas a credenciales .
  */
 public class DatosLogin {
-    public ArrayList<String> credenciales = new ArrayList<>();
-    public ArrayList<String> credencialesAdmins = new ArrayList<>();
+    public ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+    public ArrayList<String> listaAdmins = new ArrayList<>();
 
     /**
      * Constructor que inicializa las credenciales desde el archivo.
@@ -31,7 +31,7 @@ public class DatosLogin {
             String linea;
             while ((linea = lector.readLine()) != null) {
                 if (linea.contains(";")) {
-                    credenciales.add(linea); //TODO: limpiar los caracteres invalidos y espacios
+                    listaUsuarios.add(new Usuario(Login.obtenerCampoDesdeDatos(linea),Login.obtenerCampoDesdeDatos(linea,1))); //TODO: bug: si se agrega deliberadamente un ';' extra, el metodo obtenerCampoDesdeDatos falla
                 }
             }
         } catch (IOException e) {
@@ -44,7 +44,7 @@ public class DatosLogin {
         try (BufferedReader lector = new BufferedReader(new FileReader(filePath))) { //Esta logica es demasiado compleja como para implementar un boque try-catch
             String linea;
             while ((linea = lector.readLine()) != null) {
-                    credencialesAdmins.add(linea);
+                    listaAdmins.add(linea);
             }
         } catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());

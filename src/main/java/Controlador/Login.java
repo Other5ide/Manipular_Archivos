@@ -4,6 +4,8 @@ import Helper.Helpers;
 import Modelo.DatosLogin;
 import Modelo.Usuario;
 
+import java.util.ArrayList;
+
 /**
  * Clase encargada de verificar las credenciales del usuario.
  */
@@ -22,7 +24,7 @@ public class Login {
     public Usuario autenticar(String usuario, String clave, DatosLogin datos) {
         String intento = usuario + ";" + clave;
 
-        if (Helpers.contieneCoincidencia(datos.credenciales, intento)) {
+        if (validarUsuario(datos.listaUsuarios, intento)) {
             return new Usuario(usuario, clave);
         } else {
             System.out.println("contraseña o nombre de usuario incorrectos");
@@ -44,9 +46,25 @@ public class Login {
     }
 
     public boolean esAdmin(String usuario) {
-        if (Helpers.contieneCoincidencia(datos.credencialesAdmins, usuario)){
+        if (Helpers.contieneCoincidencia(datos.listaAdmins, usuario)){
             return true;
         }
+        return false;
+    }
+
+    public static boolean validarUsuario(ArrayList<Usuario> listaUsuarios, String intento) {
+        // Validación de parámetros
+        if (listaUsuarios == null || intento == null) {
+            return false;
+        }
+
+        // Buscar coincidencia exacta
+        for (Usuario elemento : listaUsuarios) {
+            if ((elemento.getNombre()+";"+elemento.getClave()).equals(intento)) {
+                return true;
+            }
+        }
+
         return false;
     }
 }

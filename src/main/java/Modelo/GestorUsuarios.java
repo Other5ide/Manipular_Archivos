@@ -31,25 +31,24 @@ public class GestorUsuarios {
     }
 
     public boolean validarRegistro(String usuario, String clave) {
-        if (usuario == null || usuario == "" || clave == null || clave == "") {
+        if (usuario == null || usuario.isEmpty() || clave == null || clave.isEmpty()) {
             System.out.println("Usuario o Clave no pueden estar vacios");
             return false;
-        } if (estaTomadoElNombre(usuario, new DatosLogin()))
-            return false;
-        return true;
+        }
+        return !estaTomadoElNombre(usuario, new DatosLogin());
     }
 
     public boolean estaTomadoElNombre(String usuario, DatosLogin datos) {
-        String nombreUsuario = usuario + ";";
+        String nombreUsuario = usuario;
 
-        for (int i = 0; i < datos.credenciales.size(); i++) {
-                if (nombreUsuario.equals(datos.credenciales.get(i))) {
-                    return true;
-                } else if (usuario.contentEquals(obtenerCampoDesdeDatos(datos.credenciales.get(i)))) {
+        for (int i = 0; i < datos.listaUsuarios.size(); i++) {
+                if (nombreUsuario.equals(datos.listaUsuarios.get(i).getNombre())) {
                     System.out.println("El usuario '" + usuario + "' ya existe");
+                    return true;
                 }
         }
         return false;
     }
+
 
 }
