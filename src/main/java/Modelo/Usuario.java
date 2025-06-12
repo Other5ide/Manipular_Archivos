@@ -6,10 +6,10 @@ public class Usuario {
     private Perfil perfil;
     private String correo;
 
-    public Usuario(String nombre, String clave, String correo) {
+    public Usuario(String nombre, String clave) {
         this.nombre = nombre;
         this.clave = clave;
-        this.perfil = new Perfil(correo);
+        //this.perfil = new Perfil();
 
     }
 
