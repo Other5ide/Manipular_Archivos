@@ -3,6 +3,7 @@ package Controlador;
 import Helper.Helpers;
 import Modelo.DatosSesion;
 import Modelo.GestorUsuarios;
+import Modelo.HistorialSesion;
 
 import java.util.Scanner;
 /**
@@ -12,9 +13,12 @@ public class SesionActiva {
     private static boolean adminPrivileges = false;
     private final String usuario;
     private final DatosSesion datosSesion;
+    private int tareasAgregadas = 0;
+    private final HistorialSesion historialSesion;
     static Scanner scanner = new Scanner(System.in);
 
     public SesionActiva(String usuario, Boolean admin) {
+        historialSesion = new HistorialSesion();
         this.usuario = usuario;
         this.datosSesion = new DatosSesion(usuario);
         adminPrivileges = admin;
@@ -39,6 +43,8 @@ public class SesionActiva {
             case "1" -> escribirTarea();
             case "2" -> {
                 System.out.println("Cerrando Sesion...");
+                System.out.println(historialSesion.toString());
+
             }
             case "3" -> {
                 if (!adminPrivileges) {
@@ -84,6 +90,8 @@ public class SesionActiva {
 
         if (this.datosSesion.escribirTarea(tarea, prioridad)) {
             System.out.println("Se ha escrito la tarea '" + tarea+"' existosamente");
+            tareasAgregadas++;
+            historialSesion.setCantidadTareasAgregadas(tareasAgregadas);
         } else {
             System.out.println("No se ha podido escribir la tarea '" + tarea+"'");
         }
