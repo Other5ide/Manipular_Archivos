@@ -8,7 +8,6 @@ public class Usuario {
     public Usuario(String nombre, String clave) {
         this.nombre = nombre;
         this.clave = clave;
-        this.perfil = new Perfil();
     }
 
     public String getNombre() {
