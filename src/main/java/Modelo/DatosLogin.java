@@ -31,7 +31,7 @@ public class DatosLogin {
             String linea;
             while ((linea = lector.readLine()) != null) {
                 if (linea.contains(";")) {
-                    listaUsuarios.add(new Usuario(Login.obtenerParteDesdeLinea(linea),Login.obtenerParteDesdeLinea(linea,1))); //TODO: bug: si se agrega deliberadamente un ';' extra, el metodo obtenerCampoDesdeDatos falla
+                    listaUsuarios.add(new Usuario(Helpers.obtenerParteDesdeLinea(linea),Helpers.obtenerParteDesdeLinea(linea,1))); //TODO: bug: si se agrega deliberadamente un ';' extra, el metodo obtenerCampoDesdeDatos falla
                 }
             }
         } catch (IOException e) {

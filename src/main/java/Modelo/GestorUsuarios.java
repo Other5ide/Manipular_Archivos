@@ -3,7 +3,6 @@ package Modelo;
 import Helper.Helpers;
 
 import java.io.*;
-import static Controlador.Login.obtenerParteDesdeLinea;
 
 /**
  * Registra nuevos usuarios en login.txt.
@@ -34,6 +33,8 @@ public class GestorUsuarios {
         if (usuario == null || usuario.isEmpty() || clave == null || clave.isEmpty()) {
             System.out.println("Usuario o Clave no pueden estar vacios");
             return false;
+        } else if (usuario.contains(";") || clave.contains(";")) {
+            System.out.println("Ni Usuario ni Clave pueden contener ';'");
         }
         return !estaTomadoElNombre(usuario, new DatosLogin());
     }

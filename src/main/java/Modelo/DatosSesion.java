@@ -33,7 +33,7 @@ public class DatosSesion {
      */
     public boolean escribirTarea(String tarea, int prioridad ) {
         try (BufferedWriter escritor = new BufferedWriter(new FileWriter(nombreArchivo, true))) {
-            escritor.write(tarea);
+            escritor.write(tarea+";"+prioridad);
             escritor.newLine();
             escritor.flush();
             Tarea nuevaTarea = new Tarea(tarea);
@@ -53,7 +53,9 @@ public class DatosSesion {
             try (BufferedReader lector = new BufferedReader(new FileReader(nombreArchivo))) { //Esta logica es demasiado compleja como para implementar un bloque try-catch
                 String linea;
                 while ((linea = lector.readLine()) != null) {
-                    tareas.add(new Tarea(linea));
+                    Tarea nuevaTarea = new Tarea(Helpers.obtenerParteDesdeLinea(linea));
+                    establecerPrioridad(nuevaTarea, Integer.parseInt(Helpers.obtenerParteDesdeLinea(linea,1))); //TODO: Posible error NFE al usar parseInt
+                    tareas.add(nuevaTarea);
                     }
             } catch (IOException e) {
                 System.out.println("Error al leer el archivo: " + e.getMessage());
@@ -70,7 +72,7 @@ public class DatosSesion {
     public void mostrarTareas() {
         System.out.println("Tus tareas anotadas:");
         for (Tarea tarea : tareas) {
-            System.out.println(tarea.getDescripcion() + "; Prioridad:" + tarea.getPrioridad());
+            System.out.println(tarea.getDescripcion() + " | Prioridad:" + tarea.getPrioridad());
         }
     }
 }

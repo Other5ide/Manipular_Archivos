@@ -33,18 +33,6 @@ public class Login {
 
     }
 
-    public static String obtenerParteDesdeLinea(String lineaCredencial, int parteDeLinea) { //El texto antes del ';' de una linea es considerado una parte. El valor minimo de parteDeLinea es 0 y corresponde al nombre de usuario
-        String[] partes = lineaCredencial.split(";");
-        if (partes.length > 1) {
-            return partes[parteDeLinea];
-        } else {
-            return null;
-        }
-    }
-    public static String obtenerParteDesdeLinea(String lineaCredencial) { //si no se especifica la parteDeLinea, el metodo asume que es igual a 0 (referencia a la parte 1, la cual es el nombre de usuario)
-        return obtenerParteDesdeLinea(lineaCredencial, 0);
-    }
-
     public boolean esAdmin(String usuario) {
         if (Helpers.contieneCoincidencia(datos.listaAdmins, usuario)){
             return true;
