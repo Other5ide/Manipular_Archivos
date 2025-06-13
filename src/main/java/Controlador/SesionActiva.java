@@ -7,7 +7,7 @@ import Modelo.HistorialSesion;
 
 import java.util.Scanner;
 /**
- * Representa la sesión de un usuario logueado.
+ * Representa la sesión de un usuario logueado.2
  */
 public class SesionActiva {
     private static boolean adminPrivileges = false;
