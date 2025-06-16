@@ -1,26 +1,24 @@
 package Controlador;
 
 import Helper.Helpers;
-import Modelo.DatosSesion;
-import Modelo.GestorUsuarios;
-import Modelo.HistorialSesion;
+import Modelo.*;
 
 import java.util.Scanner;
 /**
- * Representa la sesión de un usuario logueado.2
+ * Representa la sesión de un usuario logueado.
  */
 public class SesionActiva {
     private static boolean adminPrivileges = false;
-    private final String usuario;
+    private final Usuario usuario;
     private final DatosSesion datosSesion;
     private int tareasAgregadas = 0;
     private final HistorialSesion historialSesion;
     static Scanner scanner = new Scanner(System.in);
 
-    public SesionActiva(String usuario, Boolean admin) {
+    public SesionActiva(Usuario usuario, Boolean admin) {
         historialSesion = new HistorialSesion();
         this.usuario = usuario;
-        this.datosSesion = new DatosSesion(usuario);
+        this.datosSesion = new DatosSesion(usuario.getNombre());
         adminPrivileges = admin;
         menuSesion();
     }
@@ -40,7 +38,7 @@ public class SesionActiva {
 
     private void ejecutarOpcion(String opcion) {
         switch (opcion) {
-            case "1" -> escribirTarea();
+            case "1" -> agregarTarea();
             case "2" -> {
                 System.out.println("Cerrando Sesion...");
                 System.out.println(historialSesion.toString());
@@ -53,8 +51,10 @@ public class SesionActiva {
                     registrarUsuario();
                 }
             }
-            case "4" -> {datosSesion.mostrarTareas();
+            case "4" -> {;
+                datosSesion.mostrarTareas();
             }
+
             default -> System.out.println("Opcion invalida");
         }
     }
@@ -78,17 +78,17 @@ public class SesionActiva {
     }
 
 
-    private void escribirTarea() {
+    private void agregarTarea() {
         System.out.println("Escribe la tarea para agregar: ");
         String tarea = scanner.nextLine();
         System.out.println("Define la prioridad de la tarea: (0,1 o 2)");
-        int prioridad = scanner.nextInt(); //TODO: Implementar un try para evitar un crash debido al ingreso de una letra
-        while (prioridad < 0 || prioridad > 2) {
+        String prioridad = scanner.nextLine(); //TODO: Implementar un try para evitar un crash debido al ingreso de una letra
+        while (!prioridad.equals("0") && !prioridad.equals("1") && !prioridad.equals("2")) {
             System.out.println("Prioridad invalida: debe ser un numero entero entre 0 y 2");
-            prioridad = scanner.nextInt();
+            prioridad = scanner.nextLine();
         }
 
-        if (this.datosSesion.escribirTarea(tarea, prioridad)) {
+        if (this.datosSesion.escribirTarea(tarea, Integer.parseInt(prioridad))) {
             System.out.println("Se ha escrito la tarea '" + tarea+"' existosamente");
             tareasAgregadas++;
             historialSesion.setCantidadTareasAgregadas(tareasAgregadas);

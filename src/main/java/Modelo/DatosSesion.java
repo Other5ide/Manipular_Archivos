@@ -75,4 +75,8 @@ public class DatosSesion {
             System.out.println(tarea.getDescripcion() + " | Prioridad:" + tarea.getPrioridad());
         }
     }
+
+    public ArrayList<Tarea> getTareas() {
+        return tareas;
+    }
 }

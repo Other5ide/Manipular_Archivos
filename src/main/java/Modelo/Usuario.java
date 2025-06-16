@@ -1,15 +1,15 @@
 package Modelo;
 
+import java.util.ArrayList;
+
 public class Usuario {
     private String nombre;
     private String clave;
     private Perfil perfil;
-    private String correo;
 
     public Usuario(String nombre, String clave) {
         this.nombre = nombre;
         this.clave = clave;
-        //this.perfil = new Perfil();
 
     }
 
@@ -23,5 +23,17 @@ public class Usuario {
 
     public void setClave(String clave) {
         this.clave = clave;
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+        // Asegurar la consistencia bidireccional
+        if (perfil != null && perfil.getUsuario() != this) {
+            perfil.setUsuario(this);
+        }
     }
 }

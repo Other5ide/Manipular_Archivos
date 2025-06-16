@@ -26,8 +26,8 @@ public class HistorialSesion {
     @Override
     public String toString() {
         return "HistorialSesion{" +
-                "cantidadTareasAgregadas=" + cantidadTareasAgregadas +
-                ", fechaInicioSesion=" + fechaInicioSesion +
+                "Tareas creadas esta sesión: " + cantidadTareasAgregadas +
+                ", Sesion iniciada el " + fechaInicioSesion +
                 '}';
     }
 }

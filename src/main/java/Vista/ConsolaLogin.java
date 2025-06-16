@@ -5,6 +5,7 @@ import Controlador.SesionActiva;
 import Helper.Helpers;
 import Modelo.DatosLogin;
 import Modelo.GestorUsuarios;
+import Modelo.Usuario;
 
 import java.util.Scanner;
 
@@ -69,7 +70,7 @@ public class ConsolaLogin {
         Login login = new Login();
         if (login.autenticar(usuario, contrasena, new DatosLogin()) != null) {
             System.out.println("Se ha autenticado el usuario, bienvenido al sistema " + usuario);
-            SesionActiva sesionActiva = new SesionActiva(usuario, login.esAdmin(usuario));
+            SesionActiva sesionActiva = new SesionActiva(new Usuario(usuario,contrasena), login.esAdmin(usuario));
         } else {
             System.out.println("Inicio de sesion fallido");
         }
