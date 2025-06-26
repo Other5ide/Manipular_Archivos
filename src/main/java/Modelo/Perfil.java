@@ -14,7 +14,7 @@ public class Perfil {
     private int tareasPrioridadAlta = 0;
     private final ArrayList<Tarea> listaTareas;
 
-    public Perfil(String nombre, String clave, String correo) {
+    public Perfil(String nombre, String clave) {
         this.usuario = new Usuario(nombre,clave);
         this.correo = correo;
         DatosSesion datosSesion = new DatosSesion(usuario.getNombre());

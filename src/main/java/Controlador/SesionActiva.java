@@ -51,7 +51,9 @@ public class SesionActiva {
                     registrarUsuario();
                 }
             }
-            case "4" -> {;
+            case "4" -> {
+                usuario.setPerfil(new Perfil(usuario.getNombre(), usuario.getClave()));
+                System.out.println(usuario.getPerfil().toString());
                 datosSesion.mostrarTareas();
             }
 
@@ -82,7 +84,7 @@ public class SesionActiva {
         System.out.println("Escribe la tarea para agregar: ");
         String tarea = scanner.nextLine();
         System.out.println("Define la prioridad de la tarea: (0,1 o 2)");
-        String prioridad = scanner.nextLine(); //TODO: Implementar un try para evitar un crash debido al ingreso de una letra
+        String prioridad = scanner.nextLine();
         while (!prioridad.equals("0") && !prioridad.equals("1") && !prioridad.equals("2")) {
             System.out.println("Prioridad invalida: debe ser un numero entero entre 0 y 2");
             prioridad = scanner.nextLine();
